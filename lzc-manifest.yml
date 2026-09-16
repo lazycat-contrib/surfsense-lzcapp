@@ -12,8 +12,8 @@ application:
 services:
   surfsense:
     user: root
-    # upstream: ghcr.io/modsetter/surfsense:v1.0.55
-    image: ghcr.1ms.run/modsetter/surfsense:v1.0.55
+    # upstream: ghcr.io/modsetter/surfsense:v1.0.98
+    image: ghcr.1ms.run/modsetter/surfsense:v1.0.98
     binds:
       - /lzcapp/var/data:/data
     environment:
