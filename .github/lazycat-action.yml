@@ -1,0 +1,38 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/surfsense.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: surfsense
+build:
+  run_buildscript: false
+images:
+  # 主应用：上游有完整三段 SemVer tag（v1.0.52~v1.0.94），排除 latest 与 -amd64/-arm64 后缀 tag
+  - id: surfsense
+    target: service
+    service: surfsense
+    source: ghcr.io/modsetter/surfsense
+    channel: stable
+    sort: semver
+    tag_regex: '^v\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+
+stores:
+  official:
+    # Official store publication is intentionally disabled; publish only to Miaomiao Store.
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: SurfSense
+    summary: "开源替代 NotebookLM、Perplexity 和 Glean"

@@ -1,0 +1,14 @@
+package: community.lazycat.app.surfsense
+version: 1.0.55
+name: SurfSense
+description: "开源替代 NotebookLM、Perplexity 和 Glean"
+min_os_version: "1.5.0"
+homepage: https://github.com/MODSetter/SurfSense
+author: MODSetter
+locales:
+  zh:
+    description: "开源替代 NotebookLM、Perplexity 和 Glean"
+    name: SurfSense
+  en:
+    description: "Open source alternative to NotebookLM, Perplexity, and Glean"
+    name: SurfSense

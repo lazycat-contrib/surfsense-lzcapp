@@ -1,0 +1,25 @@
+application:
+  subdomain: surfsense
+  background_task: true
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://surfsense:3000/
+    - location: /
+      domain_prefix: backend
+      backend: http://surfsense:8000/
+services:
+  surfsense:
+    user: root
+    # upstream: ghcr.io/modsetter/surfsense:v1.0.55
+    image: ghcr.1ms.run/modsetter/surfsense:v1.0.55
+    binds:
+      - /lzcapp/var/data:/data
+    environment:
+      - NEXT_PUBLIC_FASTAPI_BACKEND_URL=https://backend-{{.S.AppDomain}}
+      - NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE=LOCAL
+      - AUTH_TYPE=LOCAL
+      - REGISTRATION_ENABLED=true
+    setup_script: |
+      mkdir -p /data/postgres
